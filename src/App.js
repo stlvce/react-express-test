@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles/App.css";
+import MainPage from "./components/MainPage";
+import { ContextState } from "./context";
+
+const params = [
+    { name: "Состояние устройства", state: "включено"},
+    { name: "Состояние детектора", state: "ожидание"},
+    { name: "Температура корпуса", state: "40.6"},
+    { name: "Имя Wi-Fi сети (SSID)", state: "MyOwnNetwork"}, 
+    { name: "Сила сигнала Wi-Fi сети", state: "-68 dB"} 
+];
+
+const log = [
+    { name: "Состояние детектора", prev: "5", next: "1"},
+    { name: "Состояние детектора", prev: "1", next: "10"},
+    { name: "Сила сигнала Wi-Fi сети", prev: "20", next: "3"}
+];
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <ContextState.Provider value={[params, log]}>
+            <MainPage />
+        </ContextState.Provider>
+    );
 }
 
 export default App;

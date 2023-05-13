@@ -1,0 +1,7 @@
+[
+    { "name": "Состояние устройства", "value": "включено", "newValue": "включено"},
+    { "name": "Состояние детектора", "value": "ожидание", "newValue": "ожидание"},
+    { "name": "Температура корпуса", "value": "40.6", "newValue": "40.6"},
+    { "name": "Имя Wi-Fi сети (SSID)", "value": "MyOwnNetwork", "newValue": "MyOwnNetwork"}, 
+    { "name": "Сила сигнала Wi-Fi сети", "value": "-68 dB", "newValue": "-68 dB"} 
+]
