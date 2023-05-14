@@ -1,40 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { ContextState } from "../context";
 import Monitoring from "./tabs/Monitoring";
 import Settings from "./tabs/Settings";
 import ActivityLog from "./tabs/ActivityLog";
 import imgOpenTab from "../assets/open-nav.svg";
 import arrow from "../assets/arrow.svg";
 
+const tabs = [
+    { title: 'Мониторинг и управление', component: <Monitoring /> },
+    { title: 'Настройка', component: <Settings /> },
+    { title: 'Журнал действий', component: <ActivityLog /> },
+];
+
 const MainPage = () => {
     const [active, setActive] = useState(0);
-    const [shutdown, setShutdown] = useState(false);
-    const [restart, setRestart] = useState(false);
-    const [navPanel, setNavPanel] = useState(true)
-    
+    const [navPanel, setNavPanel] = useState(true);
+    const [,,isError] = useContext(ContextState);
     const openTab = e => setActive(+e.target.dataset.index);
-    const shutdownDevice = () => setShutdown(!shutdown);
-    const restartDevice = () => {
-        setRestart(true)
-        // setTimeout(() => {
-        //     setRestart(false)
-        // }, 5000);
-        fetch("http://localhost:5000/")
-            .then(res => console.log(res))
-            .catch(rej => console.log(rej))
-    }
-    
-    const tabs = [
-        { title: 'Мониторинг и управление', component: <Monitoring 
-                restart={restart} 
-                restartDevice={restartDevice}
-                shutdown={shutdown}
-                shutdownDevice={shutdownDevice}
-            /> 
-        },
-        { title: 'Настройка', component: <Settings /> },
-        { title: 'Журнал действий', component: <ActivityLog /> },
-    ];
-    
+        
     return (
         <main>
             {!navPanel && 
@@ -59,6 +42,7 @@ const MainPage = () => {
                 </aside>
             }
             {tabs[active].component}
+            {isError && <p style={{ position: "absolute", top: "40%", left: "50%", color: "red", fontSize: "30px" }}>Сервер не отвечает</p>}
         </main>
     );
 }

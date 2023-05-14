@@ -26,7 +26,7 @@ main>div {
 }
 
 aside {
-    height: 753px;
+    height: 1000px;
     background-size: auto;
     color: #FFF;
     display: flex;
@@ -65,3 +65,39 @@ h1 {
     gap: 1em;
     padding-right: 1em;
 }
+
+.parameter {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+}
+
+.main form {
+    display: flex;
+    flex-flow: column wrap;
+    width: 50%;
+
+}
+
+.main form>div {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2em;
+}
+
+.main form>div label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit {
+    align-self: center;
+    border: 3px solid rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    width: 10vw;
+    height: 40px;
+    
+}
+

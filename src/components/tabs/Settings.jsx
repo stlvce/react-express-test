@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { ContextState } from "../../context";
+import Input from "../ui/input/Input";
 
 const Settings = () => {
-    const [params] = useContext(ContextState);
+    const [params,,,handleSubmit, handleChange] = useContext(ContextState);
 
-    const sendForm = (e) => {
-        e.preventDefault()
-    }
+    
+
     
     return (
         <div>
@@ -16,20 +16,26 @@ const Settings = () => {
                 </h1>
             </div>
             <div className="main">  
-                <form>
+                <form onSubmit={handleSubmit}>
                     {params.map(item =>
                         <div key={item.name}>
                             <label htmlFor={item.name}>
-                                {item.name}
-                                <input type="text" name={item.name} id={item.name} defaultValue={item.state}/>
+                                {item.name}:
+                                <Input 
+                                    type="text" 
+                                    name={item.name} 
+                                    id={item.name} 
+                                    defaultValue={item.value}
+                                    onChange={handleChange}
+                                />
                             </label>
                             <label htmlFor={item.name+"ref"}>
-                                Период обновления
-                                <input type="number" name={item.name+"ref"} id={item.name+"ref"} defaultValue={0}/>
+                                Период обновления:
+                                <Input type="number" name={item.name+"ref"} id={item.name+"ref"} defaultValue={0}/>
                             </label>
                         </div> 
                     )}
-                    <input type="submit" onClick={sendForm} value="Сохранить"/>
+                    <input className="submit" type="submit" onClick={handleSubmit} value="Сохранить"/>
                 </form> 
             </div>
         </div>
