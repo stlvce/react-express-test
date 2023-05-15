@@ -1,13 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { ContextState } from "../../context";
 import Input from "../ui/input/Input";
 
 const Settings = () => {
     const [params,,,handleSubmit, handleChange] = useContext(ContextState);
 
-    
-
-    
     return (
         <div>
             <div className="header">

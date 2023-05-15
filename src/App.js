@@ -23,7 +23,10 @@ function App() {
         setShutdown(true)
         fetch("http://localhost:5000/device/?action=off")
             .then(res => res.json())
-            .then(res => setParams(res))
+            .then(res => {
+                setParams(res.params)
+                setLog(res.log)
+            })
             .catch(rej => console.log(rej))
     }
 
@@ -31,7 +34,10 @@ function App() {
         setShutdown(false)
         fetch("http://localhost:5000/device/?action=on")
             .then(res => res.json())
-            .then(res => setParams(res))
+            .then(res => {
+                setParams(res.params)
+                setLog(res.log)
+            })
             .catch(rej => console.log(rej))
     }
 

@@ -18,7 +18,7 @@ let dataDevice = JSON.parse(fs.readFileSync('./db/parameters.json'));
 let dataLog = JSON.parse(fs.readFileSync('./db/changelog.json'));
 
 function parametersUpdate(obj) {
-    fs.writeFileSync('./db/changelog.json', JSON.stringify([dataLog, ...obj.filter(i => i.value !== i.oldValue)]));
+    fs.writeFileSync('./db/changelog.json', JSON.stringify([...dataLog, ...obj.filter(i => i.value !== i.oldValue)]));
 }
 
 function addLog(obj) {
@@ -35,13 +35,17 @@ app.get('/device', cors(corsOptions), (req, res) => {
         case 'restart': 
             return setTimeout(() => res.send(false), 5000)
         case 'off': 
+            dataDevice[0].oldValue = dataDevice[0].value
             dataDevice[0].value = "отключено"
             fs.writeFileSync('./db/parameters.json', JSON.stringify(dataDevice));
-            return res.send(dataDevice)
+            parametersUpdate(dataDevice)
+            return res.send({params: dataDevice, log: dataLog})
         case 'on':
+            dataDevice[0].oldValue = dataDevice[0].value
             dataDevice[0].value = "включено"
             fs.writeFileSync('./db/parameters.json', JSON.stringify(dataDevice));
-            return res.send(dataDevice)
+            parametersUpdate(dataDevice)
+            return res.send({params: dataDevice, log: dataLog})
         default:
             return null
     }
